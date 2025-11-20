@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../services/auth/auth_service.dart';
+import '../widgets/math_captcha.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -20,6 +21,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _obscureConfirmPassword = true;
   bool _usernameExists = false;
   bool _isCheckingUsername = false;
+  bool _captchaVerified = false;
 
   @override
   void dispose() {
@@ -94,6 +96,23 @@ class _RegisterPageState extends State<RegisterPage> {
     await _checkUsername();
 
     if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    if (!_captchaVerified) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Row(
+            children: [
+              Icon(Icons.error, color: Colors.white),
+              SizedBox(width: 8),
+              Text('Please complete the verification'),
+            ],
+          ),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 3),
+        ),
+      );
       return;
     }
 
@@ -391,6 +410,16 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                       ],
                     ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // CAPTCHA Verification
+                  MathCaptcha(
+                    onVerified: (verified) {
+                      setState(() {
+                        _captchaVerified = verified;
+                      });
+                    },
                   ),
                   const SizedBox(height: 32),
 

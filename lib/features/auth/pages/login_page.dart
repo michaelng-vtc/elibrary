@@ -5,6 +5,7 @@ import '../widgets/custom_text_field.dart';
 import '../widgets/primary_button.dart';
 import '../widgets/password_visibility_toggle.dart';
 import '../widgets/dialogs.dart';
+import '../widgets/math_captcha.dart';
 
 /// Login page with clean architecture and Riverpod
 class LoginPage extends ConsumerStatefulWidget {
@@ -19,6 +20,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
+  bool _captchaVerified = false;
 
   @override
   void dispose() {
@@ -49,6 +51,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   Future<void> _handleLogin() async {
     if (!_formKey.currentState!.validate()) {
+      return;
+    }
+
+    if (!_captchaVerified) {
+      ErrorDialog.show(context, 'Please complete the verification');
       return;
     }
 
@@ -105,6 +112,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   _buildUsernameField(),
                   const SizedBox(height: 16),
                   _buildPasswordField(),
+                  const SizedBox(height: 16),
+                  MathCaptcha(
+                    onVerified: (verified) {
+                      setState(() {
+                        _captchaVerified = verified;
+                      });
+                    },
+                  ),
                   const SizedBox(height: 24),
                   _buildLoginButton(authState.isLoading),
                   const SizedBox(height: 16),
