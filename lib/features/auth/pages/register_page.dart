@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../services/auth/auth_service.dart';
 import '../widgets/math_captcha.dart';
+import '../widgets/dialogs.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -100,19 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     if (!_captchaVerified) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Row(
-            children: [
-              Icon(Icons.error, color: Colors.white),
-              SizedBox(width: 8),
-              Text('Please complete the verification'),
-            ],
-          ),
-          backgroundColor: Colors.red,
-          duration: Duration(seconds: 3),
-        ),
-      );
+      ErrorDialog.show(context, 'Please complete the verification');
       return;
     }
 
@@ -128,48 +117,17 @@ class _RegisterPageState extends State<RegisterPage> {
 
       if (mounted) {
         if (result['success']) {
-          // Show success notification
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Row(
-                children: [
-                  const Icon(Icons.check_circle, color: Colors.white),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      result['message'] ?? 'Registration successful!',
-                    ),
-                  ),
-                ],
-              ),
-              backgroundColor: Colors.green,
-              duration: const Duration(seconds: 3),
-            ),
-          );
-
-          // Navigate to login page
-          Future.delayed(const Duration(seconds: 1), () {
-            if (mounted) {
+          // Show success dialog
+          SuccessDialog.show(
+            context,
+            result['message'] ?? 'Registration successful!',
+            onDismiss: () {
               Navigator.pushReplacementNamed(context, '/login');
-            }
-          });
-        } else {
-          // Show error notification
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Row(
-                children: [
-                  const Icon(Icons.error, color: Colors.white),
-                  const SizedBox(width: 8),
-                  Expanded(
-                    child: Text(result['message'] ?? 'Registration failed'),
-                  ),
-                ],
-              ),
-              backgroundColor: Colors.red,
-              duration: const Duration(seconds: 3),
-            ),
+            },
           );
+        } else {
+          // Show error dialog
+          ErrorDialog.show(context, result['message'] ?? 'Registration failed');
         }
       }
     } finally {
