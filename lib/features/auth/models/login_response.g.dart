@@ -10,16 +10,16 @@ _$LoginResponseImpl _$$LoginResponseImplFromJson(Map<String, dynamic> json) =>
     _$LoginResponseImpl(
       success: json['success'] as bool,
       message: json['message'] as String,
-      userId: (json['user_id'] as num?)?.toInt(),
+      userId: nullableStringToInt(json['user_id']),
       username: json['username'] as String?,
-      isAdmin: (json['is_admin'] as num?)?.toInt(),
+      isAdmin: nullableStringToInt(json['is_admin']),
     );
 
 Map<String, dynamic> _$$LoginResponseImplToJson(_$LoginResponseImpl instance) =>
     <String, dynamic>{
       'success': instance.success,
       'message': instance.message,
-      'user_id': instance.userId,
+      'user_id': intToNullableString(instance.userId),
       'username': instance.username,
-      'is_admin': instance.isAdmin,
+      'is_admin': intToNullableString(instance.isAdmin),
     };

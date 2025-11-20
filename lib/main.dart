@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'pages/home_page.dart';
-import 'pages/add_book_page.dart';
-import 'pages/all_books_page.dart';
-import 'pages/register_page.dart';
+import 'features/home/pages/home_page.dart';
+import 'features/books/pages/add_book_page.dart';
+import 'features/books/pages/all_books_page.dart';
+import 'features/auth/pages/register_page.dart';
 import 'features/auth/pages/login_page.dart';
 import 'features/auth/providers/auth_provider.dart';
 

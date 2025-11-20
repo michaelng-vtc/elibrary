@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import '../../../core/converters/json_converters.dart';
 import 'user.dart';
 
 part 'login_response.freezed.dart';
@@ -12,9 +13,19 @@ class LoginResponse with _$LoginResponse {
   const factory LoginResponse({
     required bool success,
     required String message,
-    @JsonKey(name: 'user_id') int? userId,
+    @JsonKey(
+      name: 'user_id',
+      fromJson: nullableStringToInt,
+      toJson: intToNullableString,
+    )
+    int? userId,
     String? username,
-    @JsonKey(name: 'is_admin') int? isAdmin,
+    @JsonKey(
+      name: 'is_admin',
+      fromJson: nullableStringToInt,
+      toJson: intToNullableString,
+    )
+    int? isAdmin,
   }) = _LoginResponse;
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>

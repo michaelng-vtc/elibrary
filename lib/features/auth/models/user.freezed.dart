@@ -21,10 +21,10 @@ User _$UserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$User {
-  @JsonKey(name: 'user_id')
+  @JsonKey(name: 'user_id', fromJson: stringToInt, toJson: intToString)
   int get userId => throw _privateConstructorUsedError;
   String get username => throw _privateConstructorUsedError;
-  @JsonKey(name: 'is_admin')
+  @JsonKey(name: 'is_admin', fromJson: stringToInt, toJson: intToString)
   int get isAdmin => throw _privateConstructorUsedError;
 
   /// Serializes this User to a JSON map.
@@ -42,9 +42,11 @@ abstract class $UserCopyWith<$Res> {
       _$UserCopyWithImpl<$Res, User>;
   @useResult
   $Res call({
-    @JsonKey(name: 'user_id') int userId,
+    @JsonKey(name: 'user_id', fromJson: stringToInt, toJson: intToString)
+    int userId,
     String username,
-    @JsonKey(name: 'is_admin') int isAdmin,
+    @JsonKey(name: 'is_admin', fromJson: stringToInt, toJson: intToString)
+    int isAdmin,
   });
 }
 
@@ -96,9 +98,11 @@ abstract class _$$UserImplCopyWith<$Res> implements $UserCopyWith<$Res> {
   @override
   @useResult
   $Res call({
-    @JsonKey(name: 'user_id') int userId,
+    @JsonKey(name: 'user_id', fromJson: stringToInt, toJson: intToString)
+    int userId,
     String username,
-    @JsonKey(name: 'is_admin') int isAdmin,
+    @JsonKey(name: 'is_admin', fromJson: stringToInt, toJson: intToString)
+    int isAdmin,
   });
 }
 
@@ -141,21 +145,23 @@ class __$$UserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$UserImpl implements _User {
   const _$UserImpl({
-    @JsonKey(name: 'user_id') required this.userId,
+    @JsonKey(name: 'user_id', fromJson: stringToInt, toJson: intToString)
+    required this.userId,
     required this.username,
-    @JsonKey(name: 'is_admin') this.isAdmin = 0,
+    @JsonKey(name: 'is_admin', fromJson: stringToInt, toJson: intToString)
+    this.isAdmin = 0,
   });
 
   factory _$UserImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserImplFromJson(json);
 
   @override
-  @JsonKey(name: 'user_id')
+  @JsonKey(name: 'user_id', fromJson: stringToInt, toJson: intToString)
   final int userId;
   @override
   final String username;
   @override
-  @JsonKey(name: 'is_admin')
+  @JsonKey(name: 'is_admin', fromJson: stringToInt, toJson: intToString)
   final int isAdmin;
 
   @override
@@ -194,20 +200,22 @@ class _$UserImpl implements _User {
 
 abstract class _User implements User {
   const factory _User({
-    @JsonKey(name: 'user_id') required final int userId,
+    @JsonKey(name: 'user_id', fromJson: stringToInt, toJson: intToString)
+    required final int userId,
     required final String username,
-    @JsonKey(name: 'is_admin') final int isAdmin,
+    @JsonKey(name: 'is_admin', fromJson: stringToInt, toJson: intToString)
+    final int isAdmin,
   }) = _$UserImpl;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$UserImpl.fromJson;
 
   @override
-  @JsonKey(name: 'user_id')
+  @JsonKey(name: 'user_id', fromJson: stringToInt, toJson: intToString)
   int get userId;
   @override
   String get username;
   @override
-  @JsonKey(name: 'is_admin')
+  @JsonKey(name: 'is_admin', fromJson: stringToInt, toJson: intToString)
   int get isAdmin;
 
   /// Create a copy of User

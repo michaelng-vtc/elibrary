@@ -23,10 +23,18 @@ LoginResponse _$LoginResponseFromJson(Map<String, dynamic> json) {
 mixin _$LoginResponse {
   bool get success => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
-  @JsonKey(name: 'user_id')
+  @JsonKey(
+    name: 'user_id',
+    fromJson: nullableStringToInt,
+    toJson: intToNullableString,
+  )
   int? get userId => throw _privateConstructorUsedError;
   String? get username => throw _privateConstructorUsedError;
-  @JsonKey(name: 'is_admin')
+  @JsonKey(
+    name: 'is_admin',
+    fromJson: nullableStringToInt,
+    toJson: intToNullableString,
+  )
   int? get isAdmin => throw _privateConstructorUsedError;
 
   /// Serializes this LoginResponse to a JSON map.
@@ -49,9 +57,19 @@ abstract class $LoginResponseCopyWith<$Res> {
   $Res call({
     bool success,
     String message,
-    @JsonKey(name: 'user_id') int? userId,
+    @JsonKey(
+      name: 'user_id',
+      fromJson: nullableStringToInt,
+      toJson: intToNullableString,
+    )
+    int? userId,
     String? username,
-    @JsonKey(name: 'is_admin') int? isAdmin,
+    @JsonKey(
+      name: 'is_admin',
+      fromJson: nullableStringToInt,
+      toJson: intToNullableString,
+    )
+    int? isAdmin,
   });
 }
 
@@ -116,9 +134,19 @@ abstract class _$$LoginResponseImplCopyWith<$Res>
   $Res call({
     bool success,
     String message,
-    @JsonKey(name: 'user_id') int? userId,
+    @JsonKey(
+      name: 'user_id',
+      fromJson: nullableStringToInt,
+      toJson: intToNullableString,
+    )
+    int? userId,
     String? username,
-    @JsonKey(name: 'is_admin') int? isAdmin,
+    @JsonKey(
+      name: 'is_admin',
+      fromJson: nullableStringToInt,
+      toJson: intToNullableString,
+    )
+    int? isAdmin,
   });
 }
 
@@ -175,9 +203,19 @@ class _$LoginResponseImpl extends _LoginResponse {
   const _$LoginResponseImpl({
     required this.success,
     required this.message,
-    @JsonKey(name: 'user_id') this.userId,
+    @JsonKey(
+      name: 'user_id',
+      fromJson: nullableStringToInt,
+      toJson: intToNullableString,
+    )
+    this.userId,
     this.username,
-    @JsonKey(name: 'is_admin') this.isAdmin,
+    @JsonKey(
+      name: 'is_admin',
+      fromJson: nullableStringToInt,
+      toJson: intToNullableString,
+    )
+    this.isAdmin,
   }) : super._();
 
   factory _$LoginResponseImpl.fromJson(Map<String, dynamic> json) =>
@@ -188,12 +226,20 @@ class _$LoginResponseImpl extends _LoginResponse {
   @override
   final String message;
   @override
-  @JsonKey(name: 'user_id')
+  @JsonKey(
+    name: 'user_id',
+    fromJson: nullableStringToInt,
+    toJson: intToNullableString,
+  )
   final int? userId;
   @override
   final String? username;
   @override
-  @JsonKey(name: 'is_admin')
+  @JsonKey(
+    name: 'is_admin',
+    fromJson: nullableStringToInt,
+    toJson: intToNullableString,
+  )
   final int? isAdmin;
 
   @override
@@ -237,9 +283,19 @@ abstract class _LoginResponse extends LoginResponse {
   const factory _LoginResponse({
     required final bool success,
     required final String message,
-    @JsonKey(name: 'user_id') final int? userId,
+    @JsonKey(
+      name: 'user_id',
+      fromJson: nullableStringToInt,
+      toJson: intToNullableString,
+    )
+    final int? userId,
     final String? username,
-    @JsonKey(name: 'is_admin') final int? isAdmin,
+    @JsonKey(
+      name: 'is_admin',
+      fromJson: nullableStringToInt,
+      toJson: intToNullableString,
+    )
+    final int? isAdmin,
   }) = _$LoginResponseImpl;
   const _LoginResponse._() : super._();
 
@@ -251,12 +307,20 @@ abstract class _LoginResponse extends LoginResponse {
   @override
   String get message;
   @override
-  @JsonKey(name: 'user_id')
+  @JsonKey(
+    name: 'user_id',
+    fromJson: nullableStringToInt,
+    toJson: intToNullableString,
+  )
   int? get userId;
   @override
   String? get username;
   @override
-  @JsonKey(name: 'is_admin')
+  @JsonKey(
+    name: 'is_admin',
+    fromJson: nullableStringToInt,
+    toJson: intToNullableString,
+  )
   int? get isAdmin;
 
   /// Create a copy of LoginResponse

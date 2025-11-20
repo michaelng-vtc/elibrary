@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/book.dart';
-import '../services/book/book_service.dart';
+import '../../../core/models/book.dart';
+import '../../../services/book/book_service.dart';
 
 class AllBooksPage extends StatefulWidget {
   const AllBooksPage({super.key});

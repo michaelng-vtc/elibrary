@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../models/user.dart';
+import '../../core/models/user.dart';
 
 class AuthService {
   static const String baseUrl = 'http://192.168.1.195/api';

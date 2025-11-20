@@ -45,14 +45,14 @@ class Book {
   // Convert Book object to JSON
   Map<String, dynamic> toJson() {
     return {
-      if (bookId != null) 'book_id': bookId,
+      if (bookId != null) 'book_id': bookId?.toString(),
       'title': title,
       'authors': authors,
       'publishers': publishers,
       'date': date,
       'isbn': isbn,
-      'status': status,
-      'borrowed_by': borrowedBy,
+      'status': status.toString(),
+      'borrowed_by': borrowedBy.toString(),
       if (lastUpdated != null) 'last_updated': lastUpdated,
     };
   }

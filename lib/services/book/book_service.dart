@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../../models/book.dart';
+import '../../core/models/book.dart';
 
 class BookService {
   // Configure this URL to point to your PHP API endpoint
