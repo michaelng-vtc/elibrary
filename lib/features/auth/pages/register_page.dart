@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../services/auth/auth_service.dart';
+import '../repositories/auth_repository.dart';
 import '../widgets/math_captcha.dart';
 import '../widgets/dialogs.dart';
+import '../widgets/password_strength_indicator.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -15,7 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  final _authService = AuthService();
+  final _authRepository = AuthRepository();
 
   bool _isLoading = false;
   bool _obscurePassword = true;
@@ -42,7 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
     });
 
     try {
-      final exists = await _authService.checkUsernameExists(username);
+      final exists = await _authRepository.checkUsernameExists(username);
       setState(() {
         _usernameExists = exists;
         _isCheckingUsername = false;
@@ -75,8 +76,14 @@ class _RegisterPageState extends State<RegisterPage> {
     if (value == null || value.isEmpty) {
       return 'Password is required';
     }
-    if (value.length < 6) {
-      return 'Password must be at least 6 characters';
+    if (value.length < 8) {
+      return 'Password must be at least 8 characters';
+    }
+    if (!RegExp(r'[A-Z]').hasMatch(value)) {
+      return 'Password must contain at least one uppercase letter';
+    }
+    if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+      return 'Password must contain at least one special character';
     }
     return null;
   }
@@ -110,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
     });
 
     try {
-      final result = await _authService.registerUser(
+      final result = await _authRepository.registerUser(
         _usernameController.text.trim(),
         _passwordController.text,
       );
@@ -308,7 +315,12 @@ class _RegisterPageState extends State<RegisterPage> {
                       fillColor: Colors.grey[50],
                     ),
                     validator: _validatePassword,
+                    onChanged: (value) {
+                      setState(() {}); // Trigger rebuild for strength indicator
+                    },
                   ),
+                  // Password Strength Indicator
+                  PasswordStrengthIndicator(password: _passwordController.text),
                   const SizedBox(height: 16),
 
                   // Confirm Password Field
@@ -341,34 +353,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const SizedBox(height: 8),
 
-                  // Password Requirements Info
-                  Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.blue[50],
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.blue[200]!),
-                    ),
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.info_outline,
-                          size: 20,
-                          color: Colors.blue[700],
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            'Password must be at least 6 characters',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.blue[700],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Password Requirements Checklist
+                  PasswordRequirements(password: _passwordController.text),
                   const SizedBox(height: 24),
 
                   // CAPTCHA Verification

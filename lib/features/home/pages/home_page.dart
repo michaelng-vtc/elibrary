@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../services/auth/auth_service.dart';
+import '../../auth/repositories/auth_repository.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,7 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _authService = AuthService();
+  final _authRepository = AuthRepository();
   String? _username;
 
   @override
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _loadUserInfo() async {
-    final username = await _authService.getUsername();
+    final username = await _authRepository.getUsername();
     setState(() {
       _username = username;
     });
@@ -233,8 +233,8 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.logout, color: Colors.red),
             title: const Text('Logout'),
             onTap: () async {
-              final authService = AuthService();
-              await authService.logout();
+              final authRepository = AuthRepository();
+              await authRepository.logout();
               if (context.mounted) {
                 Navigator.pushReplacementNamed(context, '/login');
               }

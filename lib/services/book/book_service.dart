@@ -5,7 +5,7 @@ import '../../core/models/book.dart';
 class BookService {
   // Configure this URL to point to your PHP API endpoint
   // Using Slim4 framework with public/index.php as entry point
-  static const String baseUrl = 'http://192.168.1.195/api';
+  static const String baseUrl = 'http://192.168.1.33/api';
 
   // Get all books
   Future<List<Book>> getAllBooks() async {
